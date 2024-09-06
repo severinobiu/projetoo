@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Clientes e Solicitar Empréstimo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+        }
+        h2 {
+            font-size: 24px;
+            text-align: center;
+            color: #020479;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #020479;
+        }
+        input, select, button {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #020479;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+            color: #020479;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <!-- Bloco para exibir mensagens de flash -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+
+
+    <div class="content">
+        <h2>Gerenciar Clientes e Solicitar Empréstimo</h2>
+        
+        <!-- Formulário para Cadastro de Cliente -->
+        <form action="/registrar_cliente" method="POST">
+            <label for="nome">Nome Completo:</label>
+            <input type="text" id="nome" name="nome" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" required>
+            
+            <button type="submit">Cadastrar Cliente</button>
+        </form>
+        
+        <!-- Formulário para Consulta de Cliente -->
+        <h2>Consultar Cliente</h2>
+        <form action="/consultar_clientes" method="GET">
+            <label for="consulta">Buscar Cliente por Nome ou Email:</label>
+            <input type="text" id="consulta" name="consulta" placeholder="Digite o nome ou email">
+            <button type="submit">Buscar</button>
+        </form>
+        
+        <!-- Tabela para Listar Clientes -->
+        <h2>Clientes Cadastrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if clientes %}
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.nome }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.telefone }}</td>
+                    <td>
+                        <!-- Formulário para editar cliente -->
+                        <form action="/editar_cliente/{{ cliente.id }}" method="GET" style="display:inline;">
+                            <button type="submit">Editar</button>
+                        </form>
+                        
+                        <!-- Excluir cliente -->
+                        <form action="/deletar_cliente/{{ cliente.id }}" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este cliente?');">
+                            <button type="submit">Excluir</button>
+                        </form>
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="5">Nenhum cliente encontrado.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+                    <!-- Formulário para Solicitar Empréstimo -->
+                    <h2>Solicitar Empréstimo</h2>
+                    <form action="/solicitar_emprestimo" method="POST">
+                        <label for="cliente_id">Selecionar Cliente:</label>
+                        <select id="cliente_id" name="cliente_id" required>
+                            {% if clientes %}
+                                {% for cliente in clientes %}
+                                    <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+                                {% endfor %}
+                            {% else %}
+                                <option disabled>Nenhum cliente disponível</option>
+                            {% endif %}
+                        </select>
+                        
+                        <label for="valor">Valor do Empréstimo:</label>
+                        <input type="number" id="valor" name="valor" step="0.01" required>
+                        
+                        <label for="prazo">Prazo (meses):</label>
+                        <input type="number" id="prazo" name="prazo" required>
+                        
+                        <button type="submit">Solicitar Empréstimo</button>
+                    </form>
+    </div>
+</body>
+</html>

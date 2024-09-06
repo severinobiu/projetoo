@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- Link para o Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos gerais */
+        body {
+            background-color: #f5f5f5; /* Cinza muito claro */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333; /* Cor do texto padrão */
+        }
+
+        /* Estilos do cabeçalho */
+        header {
+            background-color: #004080; /* Azul escuro */
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .header-icon {
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 20px; /* Espaço entre o ícone e o título */
+        }
+
+        .header-title {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        /* Seção hero */
+        .hero-section {
+            background-color: #e6e6e6; /* Cinza claro */
+            text-align: center;
+            padding: 80px 20px 40px;
+            margin-top: 60px; /* Espaço para o cabeçalho fixo */
+        }
+
+        .hero-section h2 {
+            font-size: 36px;
+            color: #004080; /* Azul escuro */
+            margin: 0;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            color: #666; /* Cinza médio */
+        }
+
+        /* Conteúdo principal */
+        .content {
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Estilos para a seção de segurança */
+        .security-text {
+            text-align: center;
+            font-size: 20px;
+            color: #333; /* Cor do texto */
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #e6e6e6; /* Cinza claro */
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        /* Estilos para os ícones circulares */
+        .circle-icons-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .circle-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            color: #004080; /* Azul escuro */
+            border-radius: 50%;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 2px solid #004080; /* Azul escuro */
+        }
+
+        .circle-icon i {
+            font-size: 50px; /* Aumenta o tamanho dos ícones */
+        }
+
+        /* Estilos para os ícones quadrados */
+        .square-icons-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .square-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 150px;
+            background-color: #004080; /* Azul escuro */
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .square-icon i {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .square-icon p {
+            font-size: 16px; /* Tamanho da fonte dos textos */
+            margin: 0;
+        }
+
+        .square-icon:hover {
+            background-color: #00264d; /* Azul mais escuro ao passar o mouse */
+        }
+
+        /* Estilos para o menu de navegação */
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 20px;
+            background-color: #004080; 
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+        }
+
+        .nav-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            text-align: center;
+        }
+
+        .nav-menu a:hover {
+            background-color: #00264d; /* Azul mais escuro ao passar o mouse */
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #004080; /* Azul escuro */
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <i class="fas fa-bars header-icon" onclick="toggleMenu()"></i>
+        <h1 class="header-title">Empréstimo Pessoal</h1>
+    </header>
+    <div class="hero-section">
+        <h2>Bem-vindo ao Empréstimo Pessoal</h2>
+        <p>Realize seus sonhos com facilidade e segurança.</p>
+    </div>
+    <div class="content">
+        <div class="security-text">
+            <p>Contrate com Segurança<br>
+            Nossa plataforma garante total proteção para seus dados e um atendimento de qualidade.</p>
+        </div>
+        <div class="circle-icons-container">
+            <div class="circle-icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="circle-icon">
+                <i class="fas fa-wallet"></i>
+            </div>
+            <div class="circle-icon">
+                <i class="fas fa-calculator"></i>
+            </div>
+            <div class="circle-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+        </div>
+        <div class="square-icons-container">
+            <a href="/gerenciar_clientes" class="square-icon">
+                <i class="fas fa-user"></i>
+                <p>Gerenciar Clientes</p>
+            </a>
+            <a href="#" class="square-icon">
+                <i class="fas fa-money-bill-wave"></i>
+                <p>Solicitar Empréstimo</p>
+            </a>
+            <a href="#" class="square-icon">
+                <i class="fas fa-search-dollar"></i>
+                <p>Consultar Taxa De Juros</p>
+            </a>
+            <a href="#" class="square-icon">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Contato</p>
+            </a>
+        </div>
+    </div>
+    <div class="nav-menu" id="navMenu">
+        <a href="/">Contato</a>
+        <a href="/logout">sair</a>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('navMenu');
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
+
+        function showLoginForm(event) {
+            event.preventDefault();
+            alert('Exibir formulário de login');
+        }
+
+        function showSignupForm(event) {
+            event.preventDefault();
+            alert('Exibir formulário de criação de conta');
+        }
+    </script>
+</body>
+</html>
